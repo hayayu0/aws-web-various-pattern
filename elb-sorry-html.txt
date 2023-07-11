@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<head>
+<html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>メンテナンス中 | サンプル株式会社</title>
@@ -11,8 +11,6 @@
     font-size: 1.5rem;
   }
 </style>
-</head>
-
 <body>
     <hr>
       <h1>ただいまメンテナンス中です(ELB版)</h1>
