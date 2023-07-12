@@ -9,7 +9,7 @@
 - REST APIの構築ボタン
   - プロトコル: REST
   - 新しいAPIの作成: Swagger あるいは Open API 3 からインポート
-  - 入力ボックスにapi-gateway-swagger.txt の内容を入力
+  - 入力ボックスにapi-gateway-swagger.json の内容を入力
   - エンドポイントタイプ: リージョン
   - 警告を失敗とみなすを選択
   - インポートボタンを押す
