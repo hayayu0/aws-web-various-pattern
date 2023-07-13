@@ -151,7 +151,6 @@ JSONでIAMポリシーを入力
   - 許可ポリシー: Beanstalk-sorry
   - IAMロール名: beanstalk-sorry
 
-
 ## セキュリティグループの作成
 
 - AWSマネージメントコンソールを開く
@@ -166,7 +165,6 @@ JSONでIAMポリシーを入力
     -  ソース: 0.0.0.0/0
   - アウトバウンドルール
     - 無し（デフォルト設定を削除）
-
 
 ## Elastic Beanstalk アプリケーションを作成
 
@@ -195,3 +193,12 @@ JSONでIAMポリシーを入力
 
 
 CloudFormationが自動的に実行され、設定が正しいにも関わらず途中で失敗することもある。その場合はエラーメッセージにリトライするよう指示があるので、リトライする。
+
+DNS名はアプリケーション sorrywebapp 内から確認する。URLの頭に「http://」を付与し、DNS名の .comの後に「:3000/sorry」を付与してWebブラウザからアクセスすると sorryページが表示される
+
+## 後片づけ
+
+- Elastic Beanstalk アプリケーション sorrywebappの削除
+- セキュリティグループ http3000 の削除
+- IAMロール beanstalk-sorry の削除
+- IAMポリシー Beanstalk-sorry の削除

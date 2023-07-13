@@ -29,3 +29,8 @@
 →　URLの呼び出し の文字の後にURL「xxxx.execute-api.ap-northeast-1.amazonaws.com/sorry」が表示される
 
 表示されたURLにアクセスするとsorryページが表示される
+
+
+## 後片付け
+
+- アクション ＞ APIの削除
