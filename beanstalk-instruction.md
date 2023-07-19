@@ -2,7 +2,7 @@
 
 ## パッケージ作成
 
-- 4ファイルを作成
+- 3ファイルを作成
 
 package.json
 
@@ -21,28 +21,14 @@ app.js
 const http = require('http');
 const fs = require('fs');
 const server = http.createServer(function (req, res) {
-    res.writeHead(200);
-    const htmlfile = (req.url == '/sorry') ? 'sorry' : '404';
-    res.write(fs.readFileSync(htmlfile));
+    res.writeHead(503);
+    res.write(fs.readFileSync('sorry-html'));
     res.end();
 });
 server.listen(3000);
 ```
 
-404
-
-```html
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
-<title>HTTP 404 | サンプル株式会社</title>
-<body>
-<h1>File Not Found</h1>
-</body>
-</html>
-```
-
-sorry
+sorry-html
 
 ```html
 <!DOCTYPE html>
@@ -71,7 +57,7 @@ sorry
 </html>
 ```
 
-- 4ファイルを圧縮して beanstalk-nodejs.zip にする
+- 3ファイルを圧縮して beanstalk-nodejs.zip にする
 
 ## IAMポリシーの作成
 
@@ -96,31 +82,6 @@ JSONでIAMポリシーを入力
             "Resource": [
                 "arn:aws:s3:::elasticbeanstalk-*",
                 "arn:aws:s3:::elasticbeanstalk-*/*"
-            ]
-        },
-        {
-            "Sid": "XRayAccess",
-            "Action": [
-                "xray:PutTraceSegments",
-                "xray:PutTelemetryRecords",
-                "xray:GetSamplingRules",
-                "xray:GetSamplingTargets",
-                "xray:GetSamplingStatisticSummaries"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Sid": "CloudWatchLogsAccess",
-            "Action": [
-                "logs:PutLogEvents",
-                "logs:CreateLogStream",
-                "logs:DescribeLogStreams",
-                "logs:DescribeLogGroups"
-            ],
-            "Effect": "Allow",
-            "Resource": [
-                "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk*"
             ]
         },
         {
@@ -174,13 +135,14 @@ JSONでIAMポリシーを入力
 - アプリケーションの作成ボタン
     - 環境枠: ウェブサーバー環境
     - アプリケーション名: sorrywebapp
-    - 環境名: Sorrywebapp-env
+    - 環境名: Sorrywebapp-env (自動入力される)
     - プラットフォーム: Node.js
     - アプリケーションコード: コードをアップロード
       - バージョンラベル: 1
       - ローカルファイル: beanstalk-nodejs.zip（先ほどのZIP）
     - プリセット: 単一インスタンス (無料利用枠の対象)
     - サービスロール: 新しいサービスロールを作成して使用
+    - サービスロール名: (自動で入力される)
     - EC2インスタンスプロファイル: beanstalk-sorry（先ほど作成したIAMロール）
     - VPC: デフォルトVPC
     - パブリックIP　アクティブの状態: チェックON
@@ -194,7 +156,7 @@ JSONでIAMポリシーを入力
 
 CloudFormationが自動的に実行され、設定が正しいにも関わらず途中で失敗することもある。その場合はエラーメッセージにリトライするよう指示があるので、リトライする。
 
-DNS名はアプリケーション sorrywebapp 内から確認する。URLの頭に「http://」を付与し、DNS名の .comの後に「:3000/sorry」を付与してWebブラウザからアクセスすると sorryページが表示される
+DNS名はアプリケーション sorrywebapp 内から確認する。DNS名の .comの後に「:3000/」を付与したURLでWebブラウザからアクセスすると sorryページが表示される
 
 ## 後片づけ
 
