@@ -12,6 +12,7 @@ AWS環境において、簡易的なWebサーバーを立てる場合に、ど�
 - Lambda
 - ELB
 - API Gateway
+- Cloudfront Function
 
 これがベストプラクティスというわけではなく、他にも方法があると思いますし、
 ここに挙げたけれども、ちょっとトリッキーかなという方法も含まれていたりします。
@@ -51,7 +52,7 @@ Linux+nginxでインスタンスを起動(ローンチ)して、その後コン�
 
 以下の2ファイルが対象です。
 
-- beanstalk-nodejs.zip (ZIP内: package.json, 404, sorry, app.js)
+- beanstalk-nodejs.zip (ZIP内: package.json, sorry-html, app.js)
 - beanstalk-instruction.md
 
 手順のファイルは beanstalk-instruction.md です。  
@@ -92,3 +93,12 @@ Python 3.x のLambda関数を作成して、Lambda関数URLを有効にします
 - api-gateway-instruction.md
 
 手順のファイルは api-gateway-instruction.md です。  
+
+## Cloudfront Function
+
+以下の1ファイルが対象です。
+
+- cloudfront-function-viewer-request.txt
+
+手順のファイルはありません。   
+まずCloudfront Functionを作成し、次に既存のディストリビューションのビヘイビアの編集画面にある関数の関連付けの設定で、作成した関数をビューワーリクエストの箇所に設定します。
