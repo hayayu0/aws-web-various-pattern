@@ -5,13 +5,14 @@
 AWS環境において、簡易的なWebサーバーを立てる場合に、どのようなパターンがあるのかを考えた時に、以下のサービスが思いつきます。
 
 - EC2
-- ECS
 - Lightsail
 - Elastic Beanstalk
-- S3
 - Lambda
+- S3
+- Amplify
 - ELB
 - API Gateway
+- ECS
 - Cloudfront Function
 
 これがベストプラクティスというわけではなく、他にも方法があると思いますし、
@@ -29,15 +30,6 @@ Windows環境で作成しましたが、全てUTF-8、改行コードはLFとし
 
 手順のファイルはありません。  
 EC2のユーザーデータを使ってEC2を起動(ローンチ)します。
-
-## ECS
-
-以下の2ファイルが対象です。
-
-- Dockerfile
-- ecs-instruction.md
-
-手順のファイルは ecs-instruction.md です。  
 
 ## Lightsail
 
@@ -57,6 +49,15 @@ Linux+nginxでインスタンスを起動(ローンチ)して、その後コン�
 
 手順のファイルは beanstalk-instruction.md です。  
 
+## Lambda
+
+以下の1ファイルが対象です。
+
+- lambda-handler.py
+
+手順のファイルはありません。  
+Python 3.x のLambda関数を作成して、Lambda関数URLを有効にします。
+
 ## S3
 
 以下の2ファイルが対象です。
@@ -67,14 +68,14 @@ Linux+nginxでインスタンスを起動(ローンチ)して、その後コン�
 手順のファイルはありません。  
 S3バケットにs3-bucketpolicy.txtのバケットポリシーを入力して、sorry.html をアップロードします。
 
-## Lambda
+## Amplify
 
 以下の1ファイルが対象です。
 
-- lambda-handler.py
+- amplify.zip
 
 手順のファイルはありません。  
-Python 3.x のLambda関数を作成して、Lambda関数URLを有効にします。
+新しいアプリケーション - Webアプリケーションのホストを選択し、ZIPファイルを直接アップロードします。
 
 ## ELB
 
@@ -93,6 +94,15 @@ Python 3.x のLambda関数を作成して、Lambda関数URLを有効にします
 - api-gateway-instruction.md
 
 手順のファイルは api-gateway-instruction.md です。  
+
+## ECS
+
+以下の2ファイルが対象です。
+
+- Dockerfile
+- ecs-instruction.md
+
+手順のファイルは ecs-instruction.md です。  
 
 ## Cloudfront Function
 
