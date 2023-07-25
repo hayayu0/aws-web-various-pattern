@@ -45,10 +45,11 @@ CMD /root/run-apache.sh
 
 docker build -t xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1 .
 
-※1 の後に半角スペースとドットがあるので忘れないこと
+※「1」の後に半角スペースとドットがあるので忘れないこと
 
-※-t に指定するものは、上記でメモしておいた文字の後に 「:1」を付与した文字。
-ちなみにコロンの後の 1 はバージョンを意味する
+※「xxxxxxx」はアカウントIDを指定する
+
+※コロンの後の 1 はバージョンを意味する
 
 →　dockerイメージが完成する
 
@@ -62,17 +63,17 @@ Cloud9の画面の続きで作業
 
 aws ecr create-repository --repository-name sorry
 
-aws ecr get-login-password | docker login --username AWS --password-stdin ～～.com
+aws ecr get-login-password | docker login --username AWS --password-stdin xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com
 
-※～～.com　は メモしておいた文字から /sorry を除いたもの
+※「xxxxxxx」はアカウントIDを指定する
 
 ※AWS のところはそのまま「AWS」と入力でよい
 
 →　Login Succeeded　と表示される
 
-docker push ～～.com/sorry:1
+docker push xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
 
-※～～.com/sorry:1 は、メモしておいた文字の後に 「:1」を付与した文字
+※「xxxxxxx」はアカウントIDを指定する
 
 →　DockerイメージがECRにpush(送信)される
 
@@ -93,7 +94,7 @@ docker push ～～.com/sorry:1
 - 新しいタスク定義の作成をクリック
     - タスク定義ファミリー: sorry
     - コンテナの詳細－名前: sorry
-    - コンテナの詳細－URI: ～～.com/sorry:1
+    - コンテナの詳細－URI: xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
     - 次へボタン
     - アプリケーション環境: AWS Fargate
     - オペレーティングシステム/アーキテクチャ: Linux/X86_64
@@ -112,7 +113,7 @@ docker push ～～.com/sorry:1
 - サービスタブをクリック
 - 作成ボタンを押す
     - コンピューティングオプション: 起動タイプ
-	- 起動タイプ: FARGATE
+    - 起動タイプ: FARGATE
     - デプロイ設定: サービス
     - タスク定義ファミリー: sorry
     - サービス名: sorrysvc
@@ -147,10 +148,10 @@ sorryページが表示される
 
 ## 後片づけ
 
+- Cloud9の sorry 環境の削除
 - ECSタスクの登録削除
 - ECSクラスター内のサービス sorrysvc の強制削除
 - ECSクラスター sorry の削除
 - ECRリポジトリ sorry-html の削除
 - AWS Cloud Map 名前空間 sorry の削除
-ECSクラスター sorry の削除
-- Cloud9の sorry 環境の削除
+- ECSクラスター sorry の削除
