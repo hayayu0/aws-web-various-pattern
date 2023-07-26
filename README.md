@@ -13,6 +13,7 @@ AWS環境において、簡易的なWebサーバーを立てる場合に、ど�
 - ELB
 - API Gateway
 - ECS
+- App Runner
 - Cloudfront Function
 
 これがベストプラクティスというわけではなく、他にも方法があると思いますし、
@@ -104,11 +105,20 @@ S3バケットにs3-bucketpolicy.txtのバケットポリシーを入力して�
 
 手順のファイルは ecs-instruction.md です。  
 
+## App Runner
+
+以下の2ファイルが対象です。
+
+- Dockerfile
+- app-runner-instruction.md
+
+手順のファイルは app-runner-instruction.md です。  
+
 ## Cloudfront Function
 
 以下の1ファイルが対象です。
 
 - cloudfront-function-viewer-request.txt
 
-手順のファイルはありません。   
+手順のファイルはありません。  
 まずCloudfront Functionを作成し、次に既存のディストリビューションのビヘイビアの編集画面にある関数の関連付けの設定で、作成した関数をビューワーリクエストの箇所に設定します。
