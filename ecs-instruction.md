@@ -9,7 +9,7 @@
   - インスタンスタイプ: t2.micro
   - 作成ボタン
 
-- 数分待ってから作成したsorry環境を開く
+- 1～2分ほど待ってから作成したsorry環境を開く
 
 - 開いたCloud9環境の下側のウインドウにカーソルを合わせる
 
@@ -87,13 +87,15 @@ docker push xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
 
 →　DockerイメージがECRにpush(送信)される
 
+Cloud9の画面を閉じる
+
 ## ECS クラスター定義
 
 - マネージメントコンソールでElastic Container Service (ECS) にアクセス
 - 東京リージョンを選択
 - クラスターの作成ボタン
   - クラスター名: sorry
-  - サブネット: ap-northeast-1a の1つだけに減らす
+  - サブネット: ap-northeast-1c、ap-northeast-1d の×ボタンを押して ap-northeast-1a のみにする
   - 作成ボタン
 
 → CloudFormationでクラスターが作成される
@@ -103,15 +105,15 @@ docker push xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
 - 左でタスク定義をクリック
 - 新しいタスク定義の作成をクリック
   - タスク定義ファミリー: sorry
-  - コンテナの詳細－名前: sorry
-  - コンテナの詳細－URI: xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
-  - 次へボタン
-  - アプリケーション環境: AWS Fargate
-  - オペレーティングシステム/アーキテクチャ: Linux/X86_64
-  - CPU 0.5 vCPU
-  - メモリ 1 GB
-  - ログ収集の使用: チェックを外す
-  - 次へボタン
+  - インフラストラクチャの要件
+    - 起動タイプ: AWS Fargate
+    - オペレーティングシステム/アーキテクチャ: Linux/X86_64
+    - CPU 0.5vCPU
+    - メモリ 1 GB
+  - コンテナ 1
+    - 名前: sorry
+    - URI: xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
+    - ログ収集の使用: チェックを外す
   - 作成ボタン
 
 → タスクが作成される
@@ -125,7 +127,7 @@ docker push xxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/sorry:1
   - コンピューティングオプション: 起動タイプ
   - 起動タイプ: FARGATE
   - デプロイ設定: サービス
-  - タスク定義ファミリー: sorry
+  - ファミリー: sorry
   - サービス名: sorrysvc
   - 必要なタスク: 1
   - 作成ボタン
@@ -158,9 +160,8 @@ sorryページが表示される
 ## 後片づけ
 
 - Cloud9の sorry 環境の削除
-- ECSタスクの登録削除
 - ECSクラスター内のサービス sorrysvc の強制削除
 - ECSクラスター sorry の削除
+- ECSタスクの登録解除
 - ECRリポジトリ sorry の削除
 - AWS Cloud Map 名前空間 sorry の削除
-- ECSクラスター sorry の削除
