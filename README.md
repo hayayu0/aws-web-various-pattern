@@ -118,7 +118,7 @@ S3バケットにs3-bucketpolicy.txtのバケットポリシーを入力して�
 
 以下の1ファイルが対象です。
 
-- cloudfront-function-viewer-request.txt
+- cloudfront-function-statuscode-to-503.js
 
 手順のファイルはありません。  
-まずCloudfront Functionを作成し、次に既存のディストリビューションのビヘイビアの編集画面にある関数の関連付けの設定で、作成した関数をビューワーリクエストの箇所に設定します。
+まずCloudfront Functionを作成し、次に既存のディストリビューションのビヘイビアの編集画面にある関数の関連付けの設定で、作成した関数をビューワーレスポンスの箇所に設定します。
